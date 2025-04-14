@@ -88,9 +88,10 @@
     }
   </style>
 </head>
-<audio id="bgMusic" src="../erstu.webm" autoplay loop hidden></audio>
-
 <body>
+  <!-- El audio se inicia automáticamente y se reproduce en bucle -->
+  <audio id="heartbeatSound" src="../static/audios/erestu.mp3" autoplay loop></audio>
+
   <section>
     <article>
       <h3>💌 Quiero decirte cuánto te amo 💖</h3>
@@ -98,12 +99,11 @@
       <button id="loveBtn">💌 ¿Aún me amas? Haz clic aquí</button>
     </article>
   </section>
-
+ 
   <div class="heart-popup" id="bigHeart">❤️</div>
 
   <canvas id="heartCanvas"></canvas>
-  <audio id="heartbeatSound" src="../heartbeat.mp3"></audio>
-
+  <audio id="heartbeatSound" src="../static/audios/heartbeat.mp3"></audio>
 
   <script>
     const fullText = `Siempre me dices que no te amo aunque sí lo hago y eso no va a cambiar 🥺❤️
@@ -146,7 +146,7 @@
   Hago esto para que veas que, aunque digas que no te amo, sí lo hago 💖
   
   Solo estoy intentando buscar mi manera de demostrártelo... y esta es una:
-  ✨ Haciendo algo que me gusta, para ti 🫰💝`;
+  ✨ Haciendo algo que me gusta, para ti 🫰💝` ;
   
     const element = document.getElementById('typedText');
     let i = 0;
