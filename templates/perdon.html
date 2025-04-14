@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perdón</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Poppins', sans-serif;
+      color: #b30059;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    #typedText {
+      font-size: 1.1em;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    a {
+      color: #ff69b4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    canvas {
+      display: block;
+      margin: 40px auto;
+      background-color: black;
+      border-radius: 20px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    #loveBtn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #loveBtn:hover {
+      background-color: #e055a2;
+    }
+
+    .heart-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 100px;
+      animation: heartbeat 1s infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+    }
+
+    .show-heart {
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<audio id="bgMusic" src="../erstu.webm" autoplay loop hidden></audio>
+
+<body>
+  <section>
+    <article>
+      <h3>💌 Quiero decirte cuánto te amo 💖</h3>
+      <p id="typedText"></p>
+      <button id="loveBtn">💌 ¿Aún me amas? Haz clic aquí</button>
+    </article>
+  </section>
+
+  <div class="heart-popup" id="bigHeart">❤️</div>
+
+  <canvas id="heartCanvas"></canvas>
+  <audio id="heartbeatSound" src="../heartbeat.mp3"></audio>
+
+
+  <script>
+    const fullText = `Siempre me dices que no te amo aunque sí lo hago y eso no va a cambiar 🥺❤️
+  No quiero separarme de ti, eres el amor de mi vida 💘
+  
+  Sé que siempre hemos tenido problemas 😢 algunos nos enojamos más que otras veces,
+  pero a pesar de todo yo te sigo amando 🥰 no te quiero perder nuevamente 😔
+  
+  Ahorita estás enojada porque me quería ir el otro día, y tal vez tienes razón...
+  Estoy mal, pero debes entender que por primera vez me está empezando a gustar algo 🧠💡
+  
+  Tú bien sabes y te he dicho que siempre me gusta algo, por ejemplo el gym 🏋️‍♂️
+  Hubo un tiempo que me gustó mucho, tuve un buen físico 💪 y al final ya no le eché tantas ganas...
+  
+  Siempre pasa eso 😕 hay algo que me gusta pero no es algo que me apasione 🔄
+  
+  También ya te he contado: antes quería ser arquitecto 🏛️ y me gustaba eso.
+  He querido ser muchas cosas y siempre las dejo porque al final no son algo que quiera mucho 🤷‍♂️
+  
+  Y ahora estoy con lo de la programación 💻 me gusta ver y saber cómo funcionan las cosas 🔍
+  
+  Y no sé cuánto me dure el gusto por esto... pero me gustaría que entendieras y que me apoyes 🥹
+  
+  Muchas veces quiero hablarte de esto, pero siento que no me haces mucho caso 😶‍🌫️
+  Y al final ya ni te digo nada 😞
+  
+  A veces siento que te enojas rápido 😡 y cuando te lo digo también te enojas 🙃
+  
+  Pero es que yo me tomo muchas cosas a juego 🎭 y siento que eso es lo que te molesta 😔
+  
+  Yo te amo mucho y no sabes cuánto 💗
+  
+  Siempre me preguntas 👉 <a href="/pqteamo">¿POR QUÉ TE AMO?</a> y no sé cómo decirte lo mucho que te amo 😳
+  
+  Me da vergüenza, a pesar de que ya somos novios 🫶💑
+  
+  Tampoco te he dicho 👉 <a href="/pqmgustas">¿POR QUÉ ME GUSTAS?</a> 
+  Ni 👉 <a href="/qmemolesta">¿QUÉ ME MOLESTA DE TI?</a>
+  
+  Hago esto para que veas que, aunque digas que no te amo, sí lo hago 💖
+  
+  Solo estoy intentando buscar mi manera de demostrártelo... y esta es una:
+  ✨ Haciendo algo que me gusta, para ti 🫰💝`;
+  
+    const element = document.getElementById('typedText');
+    let i = 0;
+  
+    function typeWriter() {
+      if (i < fullText.length) {
+        if (fullText.substr(i, 3) === "<a ") {
+          let end = fullText.indexOf("</a>", i) + 4;
+          element.innerHTML += fullText.substring(i, end);
+          i = end;
+        } else {
+          element.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
+          i++;
+        }
+        setTimeout(typeWriter, 25);
+      }
+    }
+  
+    typeWriter();
+  
+    const loveBtn = document.getElementById('loveBtn');
+    const bigHeart = document.getElementById('bigHeart');
+    const heartbeatSound = document.getElementById('heartbeatSound');
+  
+    loveBtn.addEventListener('click', () => {
+      heartbeatSound.currentTime = 0;
+      heartbeatSound.play();
+      bigHeart.classList.add('show-heart');
+      setTimeout(() => {
+        bigHeart.classList.remove('show-heart');
+      }, 3000);
+    });
+  
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+  
+    function heartX(k) {
+      return 15 * Math.pow(Math.sin(k), 3);
+    }
+  
+    function heartY(k) {
+      return 12 * Math.cos(k) - 5 * Math.cos(2 * k) - 2 * Math.cos(3 * k) - Math.cos(4 * k);
+    }
+  
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * 0.8;
+      canvas.height = window.innerHeight * 0.5;
+      drawHeart();
+    }
+  
+    let points = [];
+    for (let i = 0; i <= 600; i++) {
+      let k = i * 0.05;
+      points.push({ x: heartX(k), y: heartY(k) });
+    }
+  
+    function drawHeart() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.strokeStyle = 'red';
+      ctx.lineWidth = 2;
+  
+      let scale = canvas.width / 40;
+      let offsetX = canvas.width / 2;
+      let offsetY = canvas.height / 2;
+  
+      points.forEach((pt, i) => {
+        let x = pt.x * scale + offsetX;
+        let y = -pt.y * scale + offsetY;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+  
+      ctx.stroke();
+    }
+  
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  </script>
+  
+</body>
+</html>

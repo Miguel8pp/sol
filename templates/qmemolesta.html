@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Qué me molesta de ti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Poppins', sans-serif;
+      color: #b30059;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    #typedText {
+      font-size: 1.1em;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    a {
+      color: #ff69b4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    canvas {
+      display: block;
+      margin: 40px auto;
+      background-color: black;
+      border-radius: 20px;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <article>
+      <h3>¿Qué me molesta de ti? 💔</h3>
+      <p id="typedText"></p>
+    </article>
+  </section>
+
+  <canvas id="heartCanvas"></canvas>
+
+  <script>
+    const fullText = `Pues sinceramente no hay mucho, me molesta que a veces siento que te 
+        digo algo que me gusta pero no le das mucha importancia o interés 🤷‍♂️, 
+        y pues también tal vez no entiendes mucho lo que te digo, pero 
+        me gusta que muestres interés 😍 ya que es algo que me gusta. 
+        Pero hay veces que me interrumpes con otras cosas 🙄, 
+        y también que aún a veces sacas el teléfono 📱 y 
+        pues ponle que me enseñas algo pero no siempre bien 🤦‍♂️, y pues ni veo 👀. 
+        Y también me siento medio ignorado algunas veces 😔 y pues creo que no hay más 
+        cosas que me molesten 😅.
+    Pero a pesar de todo esto, te sigo amando mucho 😘 y lo único que quiero es que me comprendas más. 💖
+    ¡Te quiero mucho! 💞`;
+
+    const element = document.getElementById('typedText');
+    let i = 0;
+
+    function typeWriter() {
+      if (i < fullText.length) {
+        if (fullText.substr(i, 3) === "<a ") {
+          let end = fullText.indexOf("</a>", i) + 4;
+          element.innerHTML += fullText.substring(i, end);
+          i = end;
+        } else {
+          element.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
+          i++;
+        }
+        setTimeout(typeWriter, 25);
+      }
+    }
+
+    typeWriter();
+
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function heartX(k) {
+      return 15 * Math.pow(Math.sin(k), 3);
+    }
+
+    function heartY(k) {
+      return 12 * Math.cos(k) - 5 * Math.cos(2 * k) - 2 * Math.cos(3 * k) - Math.cos(4 * k);
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * 0.8;
+      canvas.height = window.innerHeight * 0.5;
+      drawHeart();
+    }
+
+    let points = [];
+    for (let i = 0; i <= 600; i++) {
+      let k = i * 0.05;
+      points.push({ x: heartX(k), y: heartY(k) });
+    }
+
+    function drawHeart() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.strokeStyle = 'red';
+      ctx.lineWidth = 2;
+
+      let scale = canvas.width / 40;
+      let offsetX = canvas.width / 2;
+      let offsetY = canvas.height / 2;
+
+      points.forEach((pt, i) => {
+        let x = pt.x * scale + offsetX;
+        let y = -pt.y * scale + offsetY;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+
+      ctx.stroke();
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  </script>
+</body>
+</html>

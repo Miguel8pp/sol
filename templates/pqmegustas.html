@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Por que te amo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Poppins', sans-serif;
+      color: #b30059;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    #typedText {
+      font-size: 1.1em;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    a {
+      color: #ff69b4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    canvas {
+      display: block;
+      margin: 40px auto;
+      background-color: black;
+      border-radius: 20px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    #loveBtn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #loveBtn:hover {
+      background-color: #e055a2;
+    }
+
+    .heart-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 100px;
+      animation: heartbeat 1s infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+    }
+
+    .show-heart {
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <article>
+      <h3>💌 Quiero decirte por qué me gustas 💖</h3>
+      <p id="typedText"></p>
+      <h3>💖 100 razones por las que me gustas</h3>
+      <p>
+        Tu sonrisa<br>
+        Tus ojos tienen algo que me hipnotiza<br>
+        Porque siempre sabes cómo hacerme sentir bien<br>
+        Porque contigo puedo ser yo sin que me juzgues "a veces"<br>
+        Tu voz linda<br>
+        Porque eres hermosa<br>
+        Porque me haces reír incluso cuando no quiero<br>
+        Me gustan tus abrazos<br>
+        Porque tu voz es mi sonido favorito<br>
+        Porque haces que todo tenga sentido<br>
+        Porque eres mi lugar seguro<br>
+        Porque confías en mí<br>
+        Porque me escuchas con el corazón<br>
+        Porque incluso en silencio, me haces sentir acompañado<br>
+        Por tus ocurrencias que siempre me sacan una sonrisa<br>
+        Porque me haces sentir importante<br>
+        Por cómo me miras<br>
+        Por tu forma de amar<br>
+        Porque haces que quiera ser una mejor persona<br>
+        Porque contigo todo es más bonito<br>
+        Porque me das paz<br>
+        Porque me motivas<br>
+        Porque me haces sentir amado<br>
+        Porque te preocupas por mí<br>
+        Porque eres paciente conmigo<br>
+        Por cómo me entiendes sin decir mucho o sea no tengo que explicarte y me entiendes y eso es muy bueno porque ya sabes que no sé explicar cosas<br>
+        Porque no necesito nada más cuando estoy contigo<br>
+        Porque me haces sentir en casa<br>
+        Porque sabes lo que necesito<br>
+        Porque contigo, hasta lo más normal es mágico<br>
+        Porque me haces sentir especial cada día<br>
+        Por tus detalles, grandes o pequeños<br>
+        Porque incluso cuando no estás, te siento cerca<br>
+        Por tu ternura<br>
+        Por tu inteligencia<br>
+        Porque compartimos sueños<br>
+        Porque me haces sentir valiente<br>
+        Porque confías en mí incluso cuando yo dudo<br>
+        Porque me apoyas en todo o bueno a veces<br>
+        Porque contigo aprendí lo que es el amor verdadero<br>
+        Porque siempre encuentras la forma de hacerme sonreír<br>
+        Porque me inspiras<br>
+        Porque tu risa es contagiosa<br>
+        Porque haces que los días malos valgan la pena<br>
+        Porque tienes un corazón increíble<br>
+        Porque me das tu tiempo sin pedírtelo<br>
+        Porque sabes amar sin medida<br>
+        Porque ves lo mejor en mí<br>
+        Porque no me dejas rendirme<br>
+        Porque me haces sentir completo<br>
+        Porque eres tú<br>
+        Porque tu presencia me tranquiliza<br>
+        Porque te amo hasta cuando me haces enojar<br>
+        Porque nuestras peleas no duran<br>
+        Porque te extraño aunque acabe de verte<br>
+        Porque me haces sentir mariposas aún después de tanto tiempo<br>
+        Porque siempre tienes algo bonito que decir<br>
+        Porque haces que me sienta afortunado<br>
+        Porque me recuerdas que merezco amor<br>
+        Porque me abrazas con el alma<br>
+        Porque tu forma de ver la vida me encanta<br>
+        Porque aprendo mucho de ti<br>
+        Porque me haces reír<br>
+        Porque compartes tus pensamientos conmigo<br>
+        Porque confías tus miedos a mí<br>
+        Porque estás en los momentos buenos y malos<br>
+        Porque me amas incluso en mis días más difíciles<br>
+        Porque eres auténtico<br>
+        Porque tienes una energía única<br>
+        Porque haces que me sienta orgulloso de ti<br>
+        Porque me haces sentir que todo es posible<br>
+        Porque me haces querer cuidar de ti siempre<br>
+        Porque haces que quiera quedarme<br>
+        Porque tu forma de amar es especial<br>
+        Porque llenas mis días de luz<br>
+        Porque simplemente me encantas<br>
+        Porque cada parte de ti tiene algo que amo<br>
+        Porque sé que puedo contar contigo<br>
+        Porque me haces sentir que no estoy solo<br>
+        Porque cuando hablas de lo que amas, me gusta escucharte<br>
+        Porque haces que hasta el silencio sea perfecto<br>
+        Porque me haces sentir capaz<br>
+        Porque haces que crea en el amor<br>
+        Porque me haces sentir que valgo<br>
+        Porque me haces sentir que encontré a mi persona<br>
+        Porque me haces feliz sin darte cuenta<br>
+        Porque con solo un mensaje tuyo cambia mi día<br>
+        Porque eres mi razón de sonreír<br>
+        Porque en tu mirada encontré paz<br>
+        Porque eres lo mejor que me ha pasado<br>
+        Porque te elijo todos los días<br>
+        Porque me haces sentir amado<br>
+        Porque me haces creer que el amor bonito sí existe<br>
+        Porque te amo con todo mi corazón 💗
+      </p>
+    </article>
+  </section>
+
+  <div class="heart-popup" id="bigHeart">❤️</div>
+
+  <audio id="heartbeatSound" src="../heartbeat.mp3"></audio>
+
+  <script>
+    const fullText = `Me gustan tus ojos, chiquitos, tiernos, bonitos, son la priera cosa que me gusto de ti,
+            me gusta tu nariz esta chiquita y esta bonita, me gusta tu risa, tu voz, tu sonrisa, me gustan tus cachetitos, 
+            me gustan tus chinitos, se ven muy bonitos, Es que… me gustas tanto que no sabría por dónde empezar, No es solo una cosa, ni dos… es todo, Todo tú, No puedo explicarlo cosa por cosa porque simplemente lo siento siempre que estoy contigo, Me gustas tal como eres, sin necesidad de pensarlo, Es algo que se siente, no que se explica`;
+
+    const element = document.getElementById('typedText');
+    let i = 0;
+
+    function typeWriter() {
+      if (i < fullText.length) {
+        if (fullText.substr(i, 3) === "<a ") {
+          let end = fullText.indexOf("</a>", i) + 4;
+          element.innerHTML += fullText.substring(i, end);
+          i = end;
+        } else {
+          element.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
+          i++;
+        }
+        setTimeout(typeWriter, 25);
+      }
+    }
+
+    typeWriter();
+
+
+  </script>
+
+</body>
+</html>
