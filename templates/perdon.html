@@ -89,8 +89,8 @@
   </style>
 </head>
 <body>
-  <!-- El audio se inicia automáticamente y se reproduce en bucle -->
-  <audio id="heartbeatSound" src="../static/audios/erestu.mp3" autoplay loop></audio>
+  <!-- El audio ahora se reproduce solo cuando se hace clic en el botón -->
+  <audio id="heartbeatSound" src="../static/audios/erestu.mp3" loop></audio>
 
   <section>
     <article>
@@ -103,7 +103,6 @@
   <div class="heart-popup" id="bigHeart">❤️</div>
 
   <canvas id="heartCanvas"></canvas>
-  <audio id="heartbeatSound" src="../static/audios/heartbeat.mp3"></audio>
 
   <script>
     const fullText = `Siempre me dices que no te amo aunque sí lo hago y eso no va a cambiar 🥺❤️
@@ -147,7 +146,7 @@
   
   Solo estoy intentando buscar mi manera de demostrártelo... y esta es una:
   ✨ Haciendo algo que me gusta, para ti 🫰💝` ;
-  
+
     const element = document.getElementById('typedText');
     let i = 0;
   
@@ -172,6 +171,7 @@
     const heartbeatSound = document.getElementById('heartbeatSound');
   
     loveBtn.addEventListener('click', () => {
+      // Inicia la reproducción de audio al hacer clic
       heartbeatSound.currentTime = 0;
       heartbeatSound.play();
       bigHeart.classList.add('show-heart');
