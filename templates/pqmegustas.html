@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Por que te amo</title>
+  <title>Por qué te amo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
   <style>
     body {
@@ -86,9 +86,29 @@
       opacity: 1;
       transition: opacity 0.5s ease;
     }
+
+    /* Estilo para el botón de reproducir música */
+    #playMusicBtn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #playMusicBtn:hover {
+      background-color: #e055a2;
+    }
   </style>
 </head>
 <body>
+  <!-- Botón para controlar la reproducción de música (se coloca arriba) -->
+  <button id="playMusicBtn" onclick="toggleMusic()">Reproducir Música</button>
+
   <section>
     <article>
       <h3>💌 Quiero decirte por qué me gustas 💖</h3>
@@ -195,7 +215,8 @@
 
   <div class="heart-popup" id="bigHeart">❤️</div>
 
-  <audio id="heartbeatSound" src="../heartbeat.mp3"></audio>
+  <!-- Archivo de música, se repetirá en bucle -->
+  <audio id="music" src="{{ url_for('static', filename='audios/r.mp3') }}" loop></audio>
 
   <script>
     const fullText = `Me gustan tus ojos, chiquitos, tiernos, bonitos, son la priera cosa que me gusto de ti,
@@ -221,7 +242,18 @@
 
     typeWriter();
 
+    const music = document.getElementById("music");
 
+    // Función para reproducir/pausar la música
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        document.getElementById("playMusicBtn").innerText = "Pausar Música";
+      } else {
+        music.pause();
+        document.getElementById("playMusicBtn").innerText = "Reproducir Música";
+      }
+    }
   </script>
 
 </body>

@@ -89,8 +89,8 @@
   </style>
 </head>
 <body>
-  <!-- El audio ahora se reproduce solo cuando se hace clic en el botón -->
-  <audio id="heartbeatSound" src="../static/audios/erestu.mp3" loop></audio>
+  <!-- El audio ahora se reproduce automáticamente y no se detiene entre las páginas -->
+  <audio id="heartbeatSound" src="{{ url_for('static', filename='audios/erestu.mp3') }}" loop></audio>
 
   <section>
     <article>
@@ -106,46 +106,46 @@
 
   <script>
     const fullText = `Siempre me dices que no te amo aunque sí lo hago y eso no va a cambiar 🥺❤️
-  No quiero separarme de ti, eres el amor de mi vida 💘
-  
-  Sé que siempre hemos tenido problemas 😢 algunos nos enojamos más que otras veces,
-  pero a pesar de todo yo te sigo amando 🥰 no te quiero perder nuevamente 😔
-  
-  Ahorita estás enojada porque me quería ir el otro día, y tal vez tienes razón...
-  Estoy mal, pero debes entender que por primera vez me está empezando a gustar algo 🧠💡
-  
-  Tú bien sabes y te he dicho que siempre me gusta algo, por ejemplo el gym 🏋️‍♂️
-  Hubo un tiempo que me gustó mucho, tuve un buen físico 💪 y al final ya no le eché tantas ganas...
-  
-  Siempre pasa eso 😕 hay algo que me gusta pero no es algo que me apasione 🔄
-  
-  También ya te he contado: antes quería ser arquitecto 🏛️ y me gustaba eso.
-  He querido ser muchas cosas y siempre las dejo porque al final no son algo que quiera mucho 🤷‍♂️
-  
-  Y ahora estoy con lo de la programación 💻 me gusta ver y saber cómo funcionan las cosas 🔍
-  
-  Y no sé cuánto me dure el gusto por esto... pero me gustaría que entendieras y que me apoyes 🥹
-  
-  Muchas veces quiero hablarte de esto, pero siento que no me haces mucho caso 😶‍🌫️
-  Y al final ya ni te digo nada 😞
-  
-  A veces siento que te enojas rápido 😡 y cuando te lo digo también te enojas 🙃
-  
-  Pero es que yo me tomo muchas cosas a juego 🎭 y siento que eso es lo que te molesta 😔
-  
-  Yo te amo mucho y no sabes cuánto 💗
-  
-  Siempre me preguntas 👉 <a href="/pqteamo">¿POR QUÉ TE AMO?</a> y no sé cómo decirte lo mucho que te amo 😳
-  
-  Me da vergüenza, a pesar de que ya somos novios 🫶💑
-  
-  Tampoco te he dicho 👉 <a href="/pqmgustas">¿POR QUÉ ME GUSTAS?</a> 
-  Ni 👉 <a href="/qmemolesta">¿QUÉ ME MOLESTA DE TI?</a>
-  
-  Hago esto para que veas que, aunque digas que no te amo, sí lo hago 💖
-  
-  Solo estoy intentando buscar mi manera de demostrártelo... y esta es una:
-  ✨ Haciendo algo que me gusta, para ti 🫰💝` ;
+    No quiero separarme de ti, eres el amor de mi vida 💘
+    
+    Sé que siempre hemos tenido problemas 😢 algunos nos enojamos más que otras veces,
+    pero a pesar de todo yo te sigo amando 🥰 no te quiero perder nuevamente 😔
+    
+    Ahorita estás enojada porque me quería ir el otro día, y tal vez tienes razón...
+    Estoy mal, pero debes entender que por primera vez me está empezando a gustar algo 🧠💡
+    
+    Tú bien sabes y te he dicho que siempre me gusta algo, por ejemplo el gym 🏋️‍♂️
+    Hubo un tiempo que me gustó mucho, tuve un buen físico 💪 y al final ya no le eché tantas ganas...
+    
+    Siempre pasa eso 😕 hay algo que me gusta pero no es algo que me apasione 🔄
+    
+    También ya te he contado: antes quería ser arquitecto 🏛️ y me gustaba eso.
+    He querido ser muchas cosas y siempre las dejo porque al final no son algo que quiera mucho 🤷‍♂️
+    
+    Y ahora estoy con lo de la programación 💻 me gusta ver y saber cómo funcionan las cosas 🔍
+    
+    Y no sé cuánto me dure el gusto por esto... pero me gustaría que entendieras y que me apoyes 🥹
+    
+    Muchas veces quiero hablarte de esto, pero siento que no me haces mucho caso 😶‍🌫️
+    Y al final ya ni te digo nada 😞
+    
+    A veces siento que te enojas rápido 😡 y cuando te lo digo también te enojas 🙃
+    
+    Pero es que yo me tomo muchas cosas a juego 🎭 y siento que eso es lo que te molesta 😔
+    
+    Yo te amo mucho y no sabes cuánto 💗
+    
+    Siempre me preguntas 👉 <a href="/pqteamo">¿POR QUÉ TE AMO?</a> y no sé cómo decirte lo mucho que te amo 😳
+    
+    Me da vergüenza, a pesar de que ya somos novios 🫶💑
+    
+    Tampoco te he dicho 👉 <a href="/pqmgustas">¿POR QUÉ ME GUSTAS?</a> 
+    Ni 👉 <a href="/qmemolesta">¿QUÉ ME MOLESTA DE TI?</a>
+    
+    Hago esto para que veas que, aunque digas que no te amo, sí lo hago 💖
+    
+    Solo estoy intentando buscar mi manera de demostrártelo... y esta es una:
+    ✨ Haciendo algo que me gusta, para ti 🫰💝`;
 
     const element = document.getElementById('typedText');
     let i = 0;
@@ -170,15 +170,35 @@
     const bigHeart = document.getElementById('bigHeart');
     const heartbeatSound = document.getElementById('heartbeatSound');
   
+    // Reproducir el audio automáticamente si está guardado en localStorage
+    window.onload = () => {
+      const audioState = localStorage.getItem('audioState');
+      if (audioState === 'playing') {
+        heartbeatSound.play();
+      } else if (audioState === 'paused') {
+        heartbeatSound.pause();
+      }
+    };
+  
     loveBtn.addEventListener('click', () => {
       // Inicia la reproducción de audio al hacer clic
       heartbeatSound.currentTime = 0;
       heartbeatSound.play();
+      localStorage.setItem('audioState', 'playing');
       bigHeart.classList.add('show-heart');
       setTimeout(() => {
         bigHeart.classList.remove('show-heart');
       }, 3000);
     });
+
+    // Guardar estado del audio en localStorage
+    heartbeatSound.onplay = () => {
+      localStorage.setItem('audioState', 'playing');
+    };
+
+    heartbeatSound.onpause = () => {
+      localStorage.setItem('audioState', 'paused');
+    };
   
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
@@ -226,6 +246,5 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
   </script>
-  
 </body>
 </html>

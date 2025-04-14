@@ -45,9 +45,29 @@
       max-width: 100%;
       height: auto;
     }
+
+    #playMusicBtn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #playMusicBtn:hover {
+      background-color: #e055a2;
+    }
   </style>
 </head>
 <body>
+  <button id="playMusicBtn" onclick="toggleMusic()">Reproducir Música</button>
+
+  <audio id="music" src="{{ url_for('static', filename='audios/ed.mp3') }}" loop></audio>
+
   <section>
     <article>
       <h3>¿Qué me molesta de ti? 💔</h3>
@@ -134,6 +154,35 @@
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
+       const heartbeatSound = document.getElementById('heartbeatSound');
+
+    // Reproducir el audio automáticamente si está guardado en localStorage
+    window.onload = () => {
+      const audioState = localStorage.getItem('audioState');
+      if (audioState === 'playing') {
+        heartbeatSound.play();
+      } else if (audioState === 'paused') {
+        heartbeatSound.pause();
+      }
+    };
+
+    heartbeatSound.onplay = () => {
+      localStorage.setItem('audioState', 'playing');
+    };
+
+    heartbeatSound.onpause = () => {
+      localStorage.setItem('audioState', 'paused');
+    };
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        document.getElementById("playMusicBtn").innerText = "Pausar Música";
+      } else {
+        music.pause();
+        document.getElementById("playMusicBtn").innerText = "Reproducir Música";
+      }
+    }
   </script>
 </body>
 </html>
