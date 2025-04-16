@@ -22,7 +22,7 @@
             <h4>Car's Outside</h4>
             <p>James Artur  <i class="fa-solid fa-music"></i></p>
             <button id="playMusicBtn" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
-            <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+            <audio id="music" src="{{ url_for('static', filename='audios/js.mp3') }}" loop></audio>
         </article>
     </section>
 
