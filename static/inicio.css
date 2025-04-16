@@ -26,10 +26,10 @@ h3 {
 }
 
 .loveBtn a {
+    max-width: 350px;
     text-decoration: none;
     color: white;
-
-
+    padding: 12px 45px;
 }
 
 .loveBtn:hover {
