@@ -1,0 +1,38 @@
+body {
+    background-color: #fff0f5;
+    font-family: 'Poppins', sans-serif;
+    color: #b30059;
+    padding: 20px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.loveBtn {
+    display: block;
+    max-width: 350px;
+    margin: auto;
+    padding: 12px 25px;
+    background-color: #ff69b4;
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+.loveBtn a {
+    text-decoration: none;
+    color: white;
+
+
+}
+
+.loveBtn:hover {
+    background-color: #e055a2;
+}
+

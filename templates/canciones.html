@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌Canciones💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/24e326a22f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/canciones.css">
+</head>
+<body>
+    <header><a href="/inicio">Regresar</a></header>
+    <h3>Pagina en mantenimiento jajaja</h3>
+    <article class="icon">
+        <i class="fa-solid fa-gear"></i>
+    </article>
+    <section class="container">
+
+        <h1>Te Amo Mugrosa 🥰 </h1>
+        <p>Prueba</p>
+        <article class="canciones">
+            <h4>Car's Outside</h4>
+            <p>James Artur <i class="fa-solid fa-music"></i></p>
+            <button id="playMusicBtn" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
+            <audio id="music" src="{{ url_for('static', filename='audios/js.mp3') }}" loop></audio>
+        </article>
+    </section>
+
+
+    <script>
+
+          function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        document.getElementById("playMusicBtn").innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        music.pause();
+document.getElementById("playMusicBtn").innerHTML = '<i class="fa-solid fa-play"></i>';
+      }
+    }
+    </script>
+</body>
+</html>

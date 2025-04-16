@@ -1,0 +1,76 @@
+body {
+    background-color: #fff0f5;
+    font-family: 'Poppins', sans-serif;
+    color: #b30059;
+    padding: 20px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+header a{
+    display: block;
+    text-align: left;
+  }
+
+.icon i {
+    font-size: 70px;
+}
+
+#playMusicBtn {
+    padding: 12px 25px;
+    background-color: #ff69b4;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+#playMusicBtn:hover {
+    background-color: #e055a2;
+}
+
+.container {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+}
+
+section article {
+  box-shadow: #ff69b4 -5px 5px 20px;
+  color: #fa01a7;
+  background-color: #ffe0ec;
+  border-radius: 15px;
+}
+
+section article h4, section article p {
+    margin: 2px;
+}
+
+section article h4 {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+section article button {
+  margin-bottom: 20px;
+}
+
+#playMusicBtn:active {
+  transform: scale(0.95);
+}

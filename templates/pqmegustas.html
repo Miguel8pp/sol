@@ -5,108 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Por qué te amo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #fff0f5;
-      font-family: 'Poppins', sans-serif;
-      color: #b30059;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h3 {
-      font-size: 2em;
-      margin-bottom: 15px;
-    }
-
-    #typedText {
-      font-size: 1.1em;
-      max-width: 800px;
-      margin: auto;
-      line-height: 1.7;
-      white-space: pre-line;
-    }
-
-    a {
-      color: #ff69b4;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    canvas {
-      display: block;
-      margin: 40px auto;
-      background-color: black;
-      border-radius: 20px;
-      max-width: 100%;
-      height: auto;
-    }
-
-    #loveBtn {
-      margin-top: 30px;
-      padding: 12px 25px;
-      background-color: #ff69b4;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    #loveBtn:hover {
-      background-color: #e055a2;
-    }
-
-    .heart-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 100px;
-      animation: heartbeat 1s infinite;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-    }
-
-    .show-heart {
-      opacity: 1;
-      transition: opacity 0.5s ease;
-    }
-
-    /* Estilo para el botón de reproducir música */
-    #playMusicBtn {
-      margin-top: 30px;
-      padding: 12px 25px;
-      background-color: #ff69b4;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    #playMusicBtn:hover {
-      background-color: #e055a2;
-    }
-  </style>
+  <link rel="stylesheet" href="../static/pqmegustas.css">
 </head>
 <body>
-  <!-- Botón para controlar la reproducción de música (se coloca arriba) -->
+  <header><a href="/teamo">Regresar</a></header>
+
   <button id="playMusicBtn" onclick="toggleMusic()">Reproducir Música</button>
 
   <section>
@@ -221,7 +124,9 @@
   <script>
     const fullText = `Me gustan tus ojos, chiquitos, tiernos, bonitos, son la priera cosa que me gusto de ti,
             me gusta tu nariz esta chiquita y esta bonita, me gusta tu risa, tu voz, tu sonrisa, me gustan tus cachetitos, 
-            me gustan tus chinitos, se ven muy bonitos, Es que… me gustas tanto que no sabría por dónde empezar, No es solo una cosa, ni dos… es todo, Todo tú, No puedo explicarlo cosa por cosa porque simplemente lo siento siempre que estoy contigo, Me gustas tal como eres, sin necesidad de pensarlo, Es algo que se siente, no que se explica`;
+            me gustan tus chinitos, se ven muy bonitos, Es que… me gustas tanto que no sabría por dónde empezar,
+             No es solo una cosa, ni dos… es todo, Todo tú, No puedo explicarlo cosa por cosa porque simplemente lo siento siempre que estoy contigo, 
+             Me gustas tal como eres, sin necesidad de pensarlo, Es algo que se siente, no que se explica`;
 
     const element = document.getElementById('typedText');
     let i = 0;

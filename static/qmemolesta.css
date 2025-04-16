@@ -1,0 +1,60 @@
+body {
+    background-color: #fff0f5;
+    font-family: 'Poppins', sans-serif;
+    color: #b30059;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  #typedText {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  canvas {
+    display: block;
+    margin: 40px auto;
+    background-color: black;
+    border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  #playMusicBtn {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #ff69b4;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #playMusicBtn:hover {
+    background-color: #e055a2;
+  }
+
+  header a{
+    display: block;
+    text-align: left;
+  }
