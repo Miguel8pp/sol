@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat en vivo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff0f5;
+            font-family: 'Poppins', sans-serif;
+            color: #b30059;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #messages {
+            border: 2px solid;
+            border-color: #ff69b4;
+            padding: 10px; /* Reducción del padding */
+            margin-bottom: 15px; /* Reducción del margin */
+            overflow-y: auto;
+            background-color: white;
+            border-radius: 10px; /* Reducción del border-radius */
+            text-align: left;
+            flex-grow: 1;
+            font-size: 0.9em; /* Reducción del tamaño de la fuente */
+        }
+
+        #message_input {
+            outline: none;
+            width: calc(65% - 10px);
+            padding: 8px; /* Reducción del padding */
+            margin-right: 10px;
+            border: 1px solid;
+            border-color: #ff69b4;
+            border-radius: 8px; /* Reducción del border-radius */
+            font-size: 0.9em;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #send_button {
+            width: 30%;
+            padding: 8px 12px; /* Reducción del padding */
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 8px; /* Reducción del border-radius */
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #send_button:hover {
+            background-color: #e055a2;
+        }
+
+        p {
+            margin: 5px 0; /* Reducción del margin */
+            text-align: left;
+        }
+
+        header a {
+            display: block;
+            text-align: left;
+            color: #ff69b4;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        #input-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        #color-selector {
+            margin-bottom: 10px;
+        }
+
+        #color-selector button {
+            padding: 6px 10px; /* Reducción del padding */
+            margin: 0 3px; /* Reducción del margin */
+            border: none;
+            border-radius: 4px; /* Reducción del border-radius */
+            cursor: pointer;
+            font-size: 0.8em; /* Reducción del tamaño de la fuente */
+        }
+
+        #color-selector button.pink {
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        #color-selector button.blue {
+            background-color: #87CEEB;
+            color: white;
+        }
+
+        a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+    header a{
+    display: block;
+    text-align: left;
+  }
+    </style>
+</head>
+<body id="body">
+    <header><a href="javascript:history.back()">Regresar</a>
+
+    <div id="color-selector">
+        <button class="pink" onclick="changeColor('#ff69b4','#fff0f5')">Rosa</button>
+        <button class="blue" onclick="changeColor('#87CEEB','#e8f5ff')">Azul</button>
+    </div>
+    <div id="messages"></div>
+    <div id="input-container">
+        <input type="text" id="message_input" placeholder="Mensaje aquí">
+        <button id="send_button">Enviar</button>
+    </div>
+    <script>
+        const socket = io();
+        const messages = document.getElementById('messages');
+        const messageInput = document.getElementById('message_input');
+        const sendButton = document.getElementById('send_button');
+
+        socket.on('receive_message', (data) => {
+            messages.innerHTML += `<p>${data.message}</p>`;
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        sendButton.addEventListener('click', () => {
+            const message = messageInput.value;
+            socket.emit('send_message', { message: message });
+            messageInput.value = '';
+        });
+
+        function changeColor(color,color2) {
+            document.getElementById('body').style.backgroundColor = color2;
+            document.getElementById('messages').style.borderColor = color;
+            document.getElementById('message_input').style.borderColor = color;
+            document.getElementById('send_button').style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌Tiempo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/tiempo.css">
+</head>
+<body>
+    <header><a href="javascript:history.back()">Regresar</a>
+
+    <h1>Tiempo de Nuestra relación 💖</h1>
+    <section>
+        <article id="tiempo-container">
+            <p><span id="anios">0</span> años</p>
+            <p><span id="meses">0</span> meses</p>
+            <p><span id="dias">0</span> días</p>
+            <p><span id="horas">0</span> horas</p>
+            <p><span id="minutos">0</span> minutos</p>
+            <p><span id="segundos">0</span> segundos</p>
+        </article>
+    </section>
+
+    <script>
+        // Define la fecha de inicio de la relación
+        const fechaInicio = new Date("2024-07-26T00:00:00");
+        function actualizarTiempo() {
+            const ahora = new Date();
+            let tiempo = ahora - fechaInicio;
+
+            let segundosTotales = Math.floor(tiempo / 1000);
+            let minutos = Math.floor(segundosTotales / 60);
+            let horas = Math.floor(minutos / 60);
+            let dias = Math.floor(horas / 24);
+
+            // Calculamos años, meses, días reales usando fechas
+            let fechaActual = new Date();
+            let anios = fechaActual.getFullYear() - fechaInicio.getFullYear();
+            let meses = fechaActual.getMonth() - fechaInicio.getMonth();
+            let diasMes = fechaActual.getDate() - fechaInicio.getDate();
+
+            if (diasMes < 0) {
+                meses -= 1;
+                const ultimoMes = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), 0).getDate();
+                diasMes += ultimoMes;
+            }
+            if (meses < 0) {
+                anios -= 1;
+                meses += 12;
+            }
+
+            let horasRestantes = horas % 24;
+            let minutosRestantes = minutos % 60;
+            let segundosRestantes = segundosTotales % 60;
+
+            document.getElementById('anios').textContent = anios;
+            document.getElementById('meses').textContent = meses;
+            document.getElementById('dias').textContent = diasMes;
+            document.getElementById('horas').textContent = horasRestantes;
+            document.getElementById('minutos').textContent = minutosRestantes;
+            document.getElementById('segundos').textContent = segundosRestantes;
+        }
+
+        setInterval(actualizarTiempo, 1000);
+        actualizarTiempo();
+    </script>
+</body>
+</html>

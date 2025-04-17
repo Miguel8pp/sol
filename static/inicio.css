@@ -13,9 +13,10 @@ h3 {
 
 .loveBtn {
     display: block;
+    width: 100%;
     max-width: 350px;
     margin: auto;
-    padding: 12px 25px;
+    padding: 12px 2px;
     background-color: #ff69b4;
     border-radius: 12px;
     font-size: 20px;

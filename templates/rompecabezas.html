@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rompecabezas de Amor</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background-color: #fff0f5;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #d63384;
+    }
+
+    select {
+      font-size: 1rem;
+      padding: 5px 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 2px solid #d63384;
+      background-color: #fff;
+      color: #d63384;
+      outline: none;
+    }
+
+    #puzzle {
+      width: 400px;
+      height: 400px;
+      margin: 20px auto;
+      display: grid;
+      gap: 2px;
+      border: 3px solid #d63384;
+    }
+
+    .piece {
+      width: 100%;
+      height: 100%;
+      background-image: url('../static/img/s.jpeg'); /* Puedes cambiar la imagen por la que tú quieras */
+      background-size: 100% 100%;
+      cursor: grab;
+      user-select: none;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #ff69b4;
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+    header a{
+    display: block;
+    text-align: left;
+  }
+  </style>
+</head>
+<body>
+  <header><a href="javascript:history.back()">Regresar</a>
+
+<h1>🧩 Nuestro Rompecabezas 🧩</h1>
+
+<!-- Selector para que ella elija la dificultad (3x3, 4x4, etc) -->
+<label for="size">Elige cuántas piezas:</label>
+<select id="size">
+  <option value="3">3 x 3</option>
+  <option value="4">4 x 4</option>
+  <option value="5">5 x 5</option>
+</select>
+
+<div id="puzzle"></div>
+<div id="message">💖 Eres la pieza que faltaba 💖</div>
+
+<script>
+  const puzzle = document.getElementById('puzzle');
+  const selector = document.getElementById('size');
+  let dragged;
+
+  // Función para iniciar o reiniciar el rompecabezas
+  function initPuzzle(size) {
+    puzzle.innerHTML = ''; // Limpiamos el puzzle anterior
+    puzzle.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    puzzle.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+    const totalPieces = size * size;
+    let positions = [];
+
+    // Creamos una lista de posiciones aleatorias
+    while (positions.length < totalPieces) {
+      let num = Math.floor(Math.random() * totalPieces);
+      if (!positions.includes(num)) positions.push(num);
+    }
+
+    // Creamos cada pieza del rompecabezas
+    positions.forEach((pos, i) => {
+      const piece = document.createElement('div');
+      piece.className = 'piece';
+      piece.draggable = true;
+      piece.dataset.correct = pos;
+      piece.dataset.current = i;
+
+      const x = pos % size;
+      const y = Math.floor(pos / size);
+
+      // Ajustamos la posición de fondo para que cada pieza tenga su parte
+      piece.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+      piece.style.backgroundPosition = `${-x * 100}% ${-y * 100}%`;
+
+      // Drag & Drop
+      piece.addEventListener('dragstart', dragStart);
+      piece.addEventListener('dragover', e => e.preventDefault());
+      piece.addEventListener('drop', drop);
+
+      puzzle.appendChild(piece);
+    });
+
+    document.getElementById('message').style.display = 'none';
+  }
+
+  function dragStart(e) {
+    dragged = e.target;
+  }
+
+  function drop(e) {
+    if (dragged === e.target) return;
+
+    const temp = document.createElement('div');
+    puzzle.replaceChild(temp, dragged);
+    puzzle.replaceChild(dragged, e.target);
+    puzzle.replaceChild(e.target, temp);
+
+    checkWin();
+  }
+
+  // Comprobamos si las piezas están en orden
+  function checkWin() {
+    const pieces = document.querySelectorAll('.piece');
+    const correct = [...pieces].every((piece, i) => +piece.dataset.correct === i);
+    if (correct) {
+      document.getElementById('message').style.display = 'block';
+    }
+  }
+
+  // Inicializa con el valor por defecto (3x3)
+  initPuzzle(3);
+
+  // Si ella cambia la cantidad de piezas, reinicia el puzzle
+  selector.addEventListener('change', () => {
+    initPuzzle(parseInt(selector.value));
+  });
+</script>
+
+</body>
+</html>

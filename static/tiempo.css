@@ -1,0 +1,27 @@
+body {
+    background-color: #fff0f5;
+    font-family: 'Poppins', sans-serif;
+    color: #b30059;
+    padding: 20px;
+    text-align: center;
+}
+
+section {
+    background-color: #ffc9f1 ;
+    margin-top: 30px;
+    font-size: 30px;
+}
+article p {
+    margin: 10px 0;
+}
+
+a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a{
+    display: block;
+    text-align: left;
+}
