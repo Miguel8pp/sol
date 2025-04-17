@@ -9,36 +9,182 @@
     <link rel="stylesheet" href="../static/canciones.css">
 </head>
 <body>
-    <header><a href="javascript:history.back()">Regresar</a>
-    </header>
-    <h3>Pagina en mantenimiento jajaja</h3>
-    <article class="icon">
-        <i class="fa-solid fa-gear"></i>
-    </article>
+    <header><a href="javascript:history.back()">Regresar</a></header>
+    <h3>Canciones que me hacen pensar en ti y te dedico</h3>
+
+
     <section class="container">
-
-        <h1>Te Amo Mugrosa 🥰 </h1>
-        <p>Prueba</p>
-        <article class="canciones">
-            <h4>Car's Outside</h4>
-            <p>James Artur  <i class="fa-solid fa-music"></i></p>
-            <button id="playMusicBtn" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
-            <audio id="music" src="{{ url_for('static', filename='audios/js.mp3') }}" loop></audio>
+        <article>
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">Car's Outside</h4>
+                <p>James Arthur</p>
+                <button class="playMusicBtn" data-audio="audio1"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio1" src="{{ url_for('static', filename='audios/js.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></div>
+              </div>
         </article>
+
+        <article class="ros">
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">Perfect</h4>
+                <p>Ed Sheeran</p>
+                <button class="playMusicBtn" data-audio="audio2"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio2" src="{{ url_for('static', filename='audios/ed.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></div>
+              </div>
+        </article>
+
+        <article>
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">Eres Tu</h4>
+                <p>Carla Morrison</p>
+                <button class="playMusicBtn" data-audio="audio3"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio3" src="{{ url_for('static', filename='audios/erestu.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">3:00</span></div>
+              </div>
+        </article>
+
+        <article class="ros">
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">Ruth B</h4>
+                <p>Dandelions</p>
+                <button class="playMusicBtn" data-audio="audio4"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio4" src="{{ url_for('static', filename='audios/r.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">3:00</span></div>
+              </div>
+        </article>
+
+        <article>
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">Yo a ti te quiero</h4>
+                <p>Maniako</p>
+                <button class="playMusicBtn" data-audio="audio5"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio5" src="{{ url_for('static', filename='audios/tequiero.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">3:00</span></div>
+              </div>
+        </article>
+
+        <article class="ros">
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">♥CARICATURA DE AMOR♥</h4>
+                <p>Maniako</p>
+                <button class="playMusicBtn" data-audio="audio6"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio6" src="{{ url_for('static', filename='audios/caricatura.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">3:00</span></div>
+              </div>
+        </article>
+
+        <article>
+            <div class="icono"><i class="fa-solid fa-music"></i></div>
+            <div class="info">
+                <h4 class="titulo">Aprender a quererte</h4>
+                <p>Morat</p>
+                <button class="playMusicBtn" data-audio="audio7"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <audio id="audio7" src="{{ url_for('static', filename='audios/quererte.mp3') }}" loop></audio>
+            <div class="player-ui" style="display: none;">
+                <input type="range" class="progress" value="0" step="1">
+                <div class="time"><span class="current">0:00</span> / <span class="duration">3:00</span></div>
+              </div>
+        </article>
+
     </section>
-
-
     <script>
-
-          function toggleMusic() {
-      if (music.paused) {
-        music.play();
-        document.getElementById("playMusicBtn").innerHTML = '<i class="fa-solid fa-pause"></i>';
-    } else {
-        music.pause();
-document.getElementById("playMusicBtn").innerHTML = '<i class="fa-solid fa-play"></i>';
-      }
-    }
+        const buttons = document.querySelectorAll(".playMusicBtn");
+    
+        buttons.forEach(btn => {
+            const audioId = btn.getAttribute("data-audio");
+            const audio = document.getElementById(audioId);
+    
+            const article = btn.closest("article");
+            const playerUI = article.querySelector(".player-ui");
+            const progress = article.querySelector(".progress");
+            const currentTimeEl = article.querySelector(".current");
+            const durationEl = article.querySelector(".duration");
+    
+            // 🔁 Este evento asegura que la duración se muestra bien
+            audio.addEventListener("loadedmetadata", () => {
+                durationEl.textContent = formatTime(audio.duration);
+                progress.max = audio.duration;
+            });
+    
+            // 🎧 Actualiza la barra y el tiempo actual
+            audio.addEventListener("timeupdate", () => {
+                progress.value = audio.currentTime;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            });
+    
+            // 🎛 Permite mover la barra para adelantar o retroceder
+            progress.addEventListener("input", () => {
+                audio.currentTime = progress.value;
+            });
+    
+            // ▶️ Acción al hacer clic en el botón
+            btn.addEventListener("click", () => {
+                // Pausar otros audios
+                document.querySelectorAll("audio").forEach(a => {
+                    if (a !== audio) {
+                        a.pause();
+                        a.currentTime = 0;
+                        const otherArticle = a.closest("article");
+                        otherArticle.querySelector(".player-ui").style.display = "none";
+                        otherArticle.querySelector(".progress").value = 0;
+                        otherArticle.querySelector(".current").textContent = "0:00";
+                    }
+                });
+    
+                // Resetear íconos
+                buttons.forEach(b => {
+                    b.innerHTML = '<i class="fa-solid fa-play"></i>';
+                });
+    
+                // Tocar o pausar el audio
+                if (audio.paused) {
+                    audio.play();
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    playerUI.style.display = "block";
+                } else {
+                    audio.pause();
+                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                    playerUI.style.display = "none";
+                }
+            });
+    
+            // 🧩 Convierte segundos a formato mm:ss
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+                return `${mins}:${secs}`;
+            }
+        });
     </script>
+    
+    
+    
+    
 </body>
 </html>
