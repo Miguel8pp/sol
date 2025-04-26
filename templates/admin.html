@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 20px; background: #f0f0f0; }
+        h1 { color: #333; }
+        .post { background: white; padding: 15px; margin-bottom: 20px; border: 1px solid #ccc; }
+        form { margin-top: 10px; }
+        input, textarea { width: 100%; padding: 8px; margin-bottom: 8px; }
+        button { padding: 8px 12px; margin-right: 5px; cursor: pointer; }
+        .edit-btn {background: #9e9b9b; color: white; border: solid 1px black;  }
+        .delete-btn { background: #9e9b9b; color: white; border: solid 1px black; }
+        .save-btn {background: #9e9b9b; color: white; border: solid 1px black;  }
+        .logout-btn { background: #9e9b9b; color: white; border: solid 1px black;  }
+        .back-btn { background: #9e9b9b; color: white; border: solid 1px black; }
+    </style>
+<style>
+    .flash-messages {
+      list-style-type: none;
+      padding: 0;
+    }
+  
+    .flash-messages li {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      color: white;  /* El texto será blanco para que sea legible */
+    }
+  
+    .flash-messages .post_created {
+      background-color: #4CAF50;  /* Verde para el mensaje de creación */
+    }
+  
+    .flash-messages .post_deleted {
+      background-color: #2196F3;  /* Azul para el mensaje de eliminación */
+    }
+  
+    .flash-messages .error {
+      background-color: #f44336;  /* Rojo para los mensajes de error */
+    }
+  </style>
+</head>
+<body>
+
+
+<h1>Panel de Administración</h1>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for message, category in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+<h2>➕ Agregar Canciones</h2>
+<form action="/admin/nuevo" method="post">
+    <input type="text" name="titulo" placeholder="nombre de cancion" required>
+    <textarea name="autor" placeholder="autor" required></textarea>
+    <input type="text" name="cancion" placeholder="URL de la Cancion">
+    <input type="text" name="naudio" placeholder="numero de audio Audio1 por ejemplo">
+    <button type="submit" class="save-btn">Guardar nuevo artículo</button>
+</form>
+
+<hr>
+<h2>Canciones existentes</h2>
+
+{% for cancioness in cancioness %}
+<div class="post">
+    <h3>{{ cancioness.titulo }}</h3>
+    <form action="/admin/editar/{{ cancioness._id }}" method="post">
+        <input type="text" name="titulo" value="{{ cancioness.titulo }}" required>
+        <textarea name="autor" required>{{ cancioness.autor }}</textarea>
+        <input type="text" name="naudio" value="{{ cancioness.naudio }}">
+        <input type="text" name="cancion" value="{{ cancioness.cancion }}">
+        <button type="submit" class="edit-btn">Guardar cambios</button>
+    </form>
+    <form action="/admin/eliminar/{{ cancioness._id }}" method="post" style="margin-top:5px;">
+        <button type="submit" class="delete-btn" onclick="return confirm('¿Eliminar este artículo?')"> 🗑️ Eliminar artículo</button>
+    </form>
+</div>
+{% endfor %}
+
+
+
+</body>
+</html>
