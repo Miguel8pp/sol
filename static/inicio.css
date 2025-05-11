@@ -1,39 +1,103 @@
 body {
-    background-color: #fff0f5;
-    font-family: 'Poppins', sans-serif;
-    color: #b30059;
-    padding: 20px;
-    text-align: center;
+  background-color: #fff0f5;
+  font-family: 'Poppins', sans-serif;
+  color: #b30059;
+  margin: 0;
+  padding: 0;
 }
 
-h3 {
-    font-size: 2em;
-    margin-bottom: 40px;
+header {
+  background-color: #fa01a7;
+  padding: 10px 20px;
 }
 
-.loveBtn {
-    display: block;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-brand h3 {
+  color: white;
+  font-weight: 500;
+  margin: 0;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.navbar-menu li a {
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, #ff69b4, #ff85c2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.navbar-menu li a:hover {
+  background: linear-gradient(135deg, #ff1493, #ff85c2);
+  transform: scale(1.05);
+  color: #fffacd;
+}
+
+/* Botón Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
     width: 100%;
-    max-width: 350px;
-    margin: auto;
-    padding: 12px 2px;
-    background-color: #ff69b4;
-    border-radius: 12px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-top: 20px;
-    box-sizing: border-box;
+    margin-top: 10px;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
 
-.loveBtn a {
-    max-width: 350px;
-    text-decoration: none;
-    color: white;
-    padding: 12px 45px;
+
+.imgs {
+  margin: 30px 0 ;
+    height: 20rem; width: 100%;
+    background-size: 100% 100%;
+    box-shadow: 20PX 20px 10PX gray;
+    animation: slider 20s ease-in-out infinite;
 }
 
-.loveBtn:hover {
-    background-color: #e055a2;
+@keyframes slider {
+   0%{background-image: url("https://i.pinimg.com/originals/42/db/f8/42dbf8848e4c118b821fa4a19ba979dd.jpg");}
+   25%{background-image:url("https://sdmntpreastus.oaiusercontent.com/files/00000000-ee38-61f9-b646-67e1a9a06fd6/raw?se=2025-05-11T08%3A58%3A10Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=b0fd38cc-3d33-418f-920e-4798de4acdd1&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-10T19%3A19%3A16Z&ske=2025-05-11T19%3A19%3A16Z&sks=b&skv=2024-08-04&sig=WdJg5dHITAWvJUX6e821o9EgQV23Ftfe9wkNNG9HqpU%3D") ;}
+   50%{background-image:url("https://frasesparami.com/wp-content/uploads/2017/09/imagenes-te-amo.jpg") ;}
+   75%{background-image:url("https://tse1.mm.bing.net/th/id/OIP.bi94_YXCd-KZsXA9Vu5kPgHaE8?w=2500&h=1669&rs=1&pid=ImgDetMain") ;}
+   100%{background-image:url("https://sdmntpreastus.oaiusercontent.com/files/00000000-42d0-61f9-b1e9-834a127c0b1f/raw?se=2025-05-11T09%3A11%3A40Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=b0fd38cc-3d33-418f-920e-4798de4acdd1&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-10T19%3A17%3A29Z&ske=2025-05-11T19%3A17%3A29Z&sks=b&skv=2024-08-04&sig=DYN2/%2BSqdxpWgwf8SjD/DVBC/0A3temlIu5m701Ojd8%3D") ;}
 }
-

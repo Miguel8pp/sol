@@ -1,15 +1,18 @@
 body {
-    background-color: #fff0f5;
+    background: linear-gradient(to right, #ffe0ec, #fff0f5);
     font-family: 'Poppins', sans-serif;
     color: #b30059;
     padding: 20px;
     text-align: center;
+    margin: 0;
 }
 
 section {
+    border-radius: 12px;
     background-color: #ffc9f1 ;
-    margin-top: 30px;
-    font-size: 30px;
+    margin: 30px auto;
+    font-size: 20px;
+    max-width: 400px;
 }
 article p {
     margin: 10px 0;
@@ -24,4 +27,12 @@ a {
 header a{
     display: block;
     text-align: left;
+}
+
+article span {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ff1493;
+    display: inline-block;
+    min-width: 60px;
 }
