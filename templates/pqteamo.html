@@ -6,9 +6,28 @@
     <title>Por que te amo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/pqteamo.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
-    <header><a href="javascript:history.back()">Regresar</a>
+    <header>
+  <nav class="navbar">
+      <div class="navbar-brand">
+        <h3>💌 Quiero decirte por qué te amo 💖</h3>
+      </div>
+      <button class="hamburger" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="navbar-menu" id="navbar-menu">
+        <li><a href="/teamo"><i class="fas fa-heart"></i> Te Amo</a></li>
+        <li><a href="/canciones"><i class="fas fa-music"></i> Canciones</a></li>
+        <li><a href="/tiempo"><i class="fas fa-clock"></i> Tiempo Juntos</a></li>
+        <li><a href="/rompe"><i class="fas fa-puzzle-piece"></i> Rompecabezas</a></li>
+        <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+      </ul> 
+    </nav>
     </header>
 
     <button id="playMusicBtn" onclick="toggleMusic()">Reproducir Música</button>
@@ -17,7 +36,6 @@
 
     <section>
         <article>
-            <h3>💌 Quiero decirte por qué te amo 💖</h3>
             <p id="typedText"></p>
         </article>
     </section>
@@ -93,7 +111,6 @@
         resizeCanvas();
            const heartbeatSound = document.getElementById('heartbeatSound');
 
-    // Reproducir el audio automáticamente si está guardado en localStorage
     window.onload = () => {
       const audioState = localStorage.getItem('audioState');
       if (audioState === 'playing') {
@@ -120,6 +137,16 @@
         document.getElementById("playMusicBtn").innerText = "Reproducir Música";
       }
     }
+
+    
+    </script>
+    <script>
+      const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('navbar-menu');
+
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle('active');
+    });
     </script>
 </body>
 </html>

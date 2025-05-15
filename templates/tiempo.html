@@ -8,9 +8,37 @@
     <link rel="stylesheet" href="../static/tiempo.css">
 </head>
 <body>
-    <header><a href="javascript:history.back()">Regresar</a>
-
-    <h1>Tiempo de Nuestra relación 💖</h1>
+ <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <h3>Tiempo de Nuestra relación 💖</h3>
+        </div>
+        <button class="hamburger" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="navbar-menu" id="navbar-menu">
+          <li>
+            <a href="/teamo"><i class="fas fa-heart"></i> Te Amo</a>
+          </li>
+          <li>
+            <a href="/canciones"><i class="fas fa-music"></i> Canciones</a>
+          </li>
+          <li>
+            <a href="/tiempo"><i class="fas fa-clock"></i> Tiempo Juntos</a>
+          </li>
+          <li>
+            <a href="/rompe"
+              ><i class="fas fa-puzzle-piece"></i> Rompecabezas</a
+            >
+          </li>
+          <li>
+            <a href="/"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <section>
         <article id="tiempo-container">
             <p><span id="anios">0</span> años</p>
@@ -63,6 +91,14 @@
 
         setInterval(actualizarTiempo, 1000);
         actualizarTiempo();
+    </script>
+        <script>
+        const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("navbar-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+      });
     </script>
 </body>
 </html>

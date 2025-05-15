@@ -1,30 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Perdón</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../static/teamo.css">
-</head>
-<body>
-  <audio id="heartbeatSound" src="{{ url_for('static', filename='audios/erestu.mp3') }}" loop></audio>
-<header><a href="javascript:history.back()">Regresar</a>
-</header>
-  <section>
-    <article>
-      <h3>💌 Quiero decirte cuánto te amo 💖</h3>
-      <p id="typedText"></p>
-      <button id="loveBtn">💌 ¿Aún me amas? Haz clic aquí</button>
-    </article>
-  </section>
- 
-  <div class="heart-popup" id="bigHeart">❤️</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perdón</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/teamo.css" />
+  </head>
+  <body>
+    <audio
+      id="heartbeatSound"
+      src="{{ url_for('static', filename='audios/erestu.mp3') }}"
+      loop
+    ></audio>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <h3>💌 Quiero decirte cuánto te amo 💖</h3>
+        </div>
+        <button class="hamburger" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="navbar-menu" id="navbar-menu">
+          <li>
+            <a href="/teamo"><i class="fas fa-heart"></i> Te Amo</a>
+          </li>
+          <li>
+            <a href="/canciones"><i class="fas fa-music"></i> Canciones</a>
+          </li>
+          <li>
+            <a href="/tiempo"><i class="fas fa-clock"></i> Tiempo Juntos</a>
+          </li>
+          <li>
+            <a href="/rompe"
+              ><i class="fas fa-puzzle-piece"></i> Rompecabezas</a
+            >
+          </li>
+          <li>
+            <a href="/"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <article>
+        <p id="typedText"></p>
+        <button id="loveBtn">💌 ¿Aún me amas? Haz clic aquí</button>
+      </article>
+    </section>
 
-  <canvas id="heartCanvas"></canvas>
+    <div class="heart-popup" id="bigHeart">❤️</div>
 
-  <script>
-    const fullText = `Siempre me dices que no te amo aunque sí lo hago y eso no va a cambiar 🥺❤️
+    <canvas id="heartCanvas"></canvas>
+
+    <script>
+      const fullText = `Siempre me dices que no te amo aunque sí lo hago y eso no va a cambiar 🥺❤️
     No quiero separarme de ti, eres el amor de mi vida 💘
     
     Sé que siempre hemos tenido problemas 😢 algunos nos enojamos más que otras veces,
@@ -66,104 +101,118 @@
     Solo estoy intentando buscar mi manera de demostrártelo... y esta es una:
     ✨ Haciendo algo que me gusta, para ti 🫰💝`;
 
-    const element = document.getElementById('typedText');
-    let i = 0;
-  
-    function typeWriter() {
-      if (i < fullText.length) {
-        if (fullText.substr(i, 3) === "<a ") {
-          let end = fullText.indexOf("</a>", i) + 4;
-          element.innerHTML += fullText.substring(i, end);
-          i = end;
-        } else {
-          element.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
-          i++; 
+      const element = document.getElementById("typedText");
+      let i = 0;
+
+      function typeWriter() {
+        if (i < fullText.length) {
+          if (fullText.substr(i, 3) === "<a ") {
+            let end = fullText.indexOf("</a>", i) + 4;
+            element.innerHTML += fullText.substring(i, end);
+            i = end;
+          } else {
+            element.innerHTML +=
+              fullText.charAt(i) === "\n" ? "<br>" : fullText.charAt(i);
+            i++;
+          }
+          setTimeout(typeWriter, 25);
         }
-        setTimeout(typeWriter, 25);
       }
-    }
-  
-    typeWriter();
-  
-    const loveBtn = document.getElementById('loveBtn');
-    const bigHeart = document.getElementById('bigHeart');
-    const heartbeatSound = document.getElementById('heartbeatSound');
-  
-    // Reproducir el audio automáticamente 
-    window.onload = () => {
-      const audioState = localStorage.getItem('audioState');
-      if (audioState === 'playing') {
+
+      typeWriter();
+
+      const loveBtn = document.getElementById("loveBtn");
+      const bigHeart = document.getElementById("bigHeart");
+      const heartbeatSound = document.getElementById("heartbeatSound");
+
+      // Reproducir el audio automáticamente
+      window.onload = () => {
+        const audioState = localStorage.getItem("audioState");
+        if (audioState === "playing") {
+          heartbeatSound.play();
+        } else if (audioState === "paused") {
+          heartbeatSound.pause();
+        }
+      };
+
+      loveBtn.addEventListener("click", () => {
+        // Inicia la reproducción de audio al hacer clic
+        heartbeatSound.currentTime = 0;
         heartbeatSound.play();
-      } else if (audioState === 'paused') {
-        heartbeatSound.pause();
-      }
-    };
-  
-    loveBtn.addEventListener('click', () => {
-      // Inicia la reproducción de audio al hacer clic
-      heartbeatSound.currentTime = 0;
-      heartbeatSound.play();
-      localStorage.setItem('audioState', 'playing');
-      bigHeart.classList.add('show-heart');
-      setTimeout(() => {
-        bigHeart.classList.remove('show-heart');
-      }, 3000);
-    });
-
-    // Guardar estado del audio en localStorage
-    heartbeatSound.onplay = () => {
-      localStorage.setItem('audioState', 'playing');
-    };
-
-    heartbeatSound.onpause = () => {
-      localStorage.setItem('audioState', 'paused');
-    };
-  
-    const canvas = document.getElementById('heartCanvas');
-    const ctx = canvas.getContext('2d');
-  
-    function heartX(k) {
-      return 15 * Math.pow(Math.sin(k), 3);
-    }
-  
-    function heartY(k) {
-      return 12 * Math.cos(k) - 5 * Math.cos(2 * k) - 2 * Math.cos(3 * k) - Math.cos(4 * k);
-    }
-  
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * 0.8;
-      canvas.height = window.innerHeight * 0.5;
-      drawHeart();
-    }
-  
-    let points = [];
-    for (let i = 0; i <= 600; i++) {
-      let k = i * 0.05;
-      points.push({ x: heartX(k), y: heartY(k) });
-    }
-  
-    function drawHeart() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-      ctx.strokeStyle = 'red';
-      ctx.lineWidth = 2;
-  
-      let scale = canvas.width / 40;
-      let offsetX = canvas.width / 2;
-      let offsetY = canvas.height / 2;
-  
-      points.forEach((pt, i) => {
-        let x = pt.x * scale + offsetX;
-        let y = -pt.y * scale + offsetY;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        localStorage.setItem("audioState", "playing");
+        bigHeart.classList.add("show-heart");
+        setTimeout(() => {
+          bigHeart.classList.remove("show-heart");
+        }, 3000);
       });
-  
-      ctx.stroke();
-    }
-  
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-  </script>
-</body>
+
+      // Guardar estado del audio en localStorage
+      heartbeatSound.onplay = () => {
+        localStorage.setItem("audioState", "playing");
+      };
+
+      heartbeatSound.onpause = () => {
+        localStorage.setItem("audioState", "paused");
+      };
+
+      const canvas = document.getElementById("heartCanvas");
+      const ctx = canvas.getContext("2d");
+
+      function heartX(k) {
+        return 15 * Math.pow(Math.sin(k), 3);
+      }
+
+      function heartY(k) {
+        return (
+          12 * Math.cos(k) -
+          5 * Math.cos(2 * k) -
+          2 * Math.cos(3 * k) -
+          Math.cos(4 * k)
+        );
+      }
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 0.5;
+        drawHeart();
+      }
+
+      let points = [];
+      for (let i = 0; i <= 600; i++) {
+        let k = i * 0.05;
+        points.push({ x: heartX(k), y: heartY(k) });
+      }
+
+      function drawHeart() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+
+        let scale = canvas.width / 40;
+        let offsetX = canvas.width / 2;
+        let offsetY = canvas.height / 2;
+
+        points.forEach((pt, i) => {
+          let x = pt.x * scale + offsetX;
+          let y = -pt.y * scale + offsetY;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+
+        ctx.stroke();
+      }
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+    </script>
+    <script>
+        const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("navbar-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+      });
+    </script>
+  </body>
 </html>

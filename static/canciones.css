@@ -2,14 +2,12 @@ body {
     background-color: #fff0f5;
     font-family: 'Poppins', sans-serif;
     color: #b30059;
-    padding: 20px;
+    padding: 0;
     text-align: center;
+    margin: 0;
 }
 
-h3 {
-    font-size: 2em;
-    margin-bottom: 40px;
-}
+
 
 a {
     color: #ff69b4;
@@ -21,10 +19,7 @@ a {
     text-decoration: underline;
   }
 
-header a{
-    display: block;
-    text-align: left;
-}
+
 
 
 .playMusicBtn {
@@ -128,4 +123,84 @@ input.progress {
   font-size: 0.9em;
   margin-top: 5px;
   color: #555;
+}
+
+header {
+  background-color: #fa01a7;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-brand h3 {
+  color: white;
+  font-weight: 500;
+  margin: 0;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.navbar-menu li a {
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, #ff69b4, #ff85c2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.navbar-menu li a:hover {
+  background: linear-gradient(135deg, #ff1493, #ff85c2);
+  transform: scale(1.05);
+  color: #fffacd;
+}
+
+/* Botón Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }

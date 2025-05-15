@@ -4,11 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style>
     body {
       font-family: 'Poppins', sans-serif;
       text-align: center;
       background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
@@ -39,7 +43,7 @@
     .piece {
       width: 100%;
       height: 100%;
-      background-image: url('../static/img/s.jpeg'); /* Puedes cambiar la imagen por la que tú quieras */
+      background-image: url('../static/img/img.png'); /* Puedes cambiar la imagen por la que tú quieras */
       background-size: 100% 100%;
       cursor: grab;
       user-select: none;
@@ -68,14 +72,110 @@
     display: block;
     text-align: left;
   }
+
+  header {
+  background-color: #fa01a7;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-brand h3 {
+  color: white;
+  font-weight: 500;
+  margin: 0;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.navbar-menu li a {
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, #ff69b4, #ff85c2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.navbar-menu li a:hover {
+  background: linear-gradient(135deg, #ff1493, #ff85c2);
+  transform: scale(1.05);
+  color: #fffacd;
+}
+
+/* Botón Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
   </style>
 </head>
 <body>
-  <header><a href="javascript:history.back()">Regresar</a>
+   <header>
+  <nav class="navbar">
+      <div class="navbar-brand">
+        <h3>🧩 Nuestro Rompecabezas 🧩</h3>
+      </div>
+      <button class="hamburger" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="navbar-menu" id="navbar-menu">
+        <li><a href="/teamo"><i class="fas fa-heart"></i> Te Amo</a></li>
+        <li><a href="/canciones"><i class="fas fa-music"></i> Canciones</a></li>
+        <li><a href="/tiempo"><i class="fas fa-clock"></i> Tiempo Juntos</a></li>
+        <li><a href="/rompe"><i class="fas fa-puzzle-piece"></i> Rompecabezas</a></li>
+        <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+      </ul> 
+    </nav>
+    </header>
 
-<h1>🧩 Nuestro Rompecabezas 🧩</h1>
 
-<!-- Selector para que ella elija la dificultad (3x3, 4x4, etc) -->
 <label for="size">Elige cuántas piezas:</label>
 <select id="size">
   <option value="3">3 x 3</option>
@@ -91,22 +191,19 @@
   const selector = document.getElementById('size');
   let dragged;
 
-  // Función para iniciar o reiniciar el rompecabezas
   function initPuzzle(size) {
-    puzzle.innerHTML = ''; // Limpiamos el puzzle anterior
+    puzzle.innerHTML = ''; 
     puzzle.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     puzzle.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
     const totalPieces = size * size;
     let positions = [];
 
-    // Creamos una lista de posiciones aleatorias
     while (positions.length < totalPieces) {
       let num = Math.floor(Math.random() * totalPieces);
       if (!positions.includes(num)) positions.push(num);
     }
 
-    // Creamos cada pieza del rompecabezas
     positions.forEach((pos, i) => {
       const piece = document.createElement('div');
       piece.className = 'piece';
@@ -117,7 +214,6 @@
       const x = pos % size;
       const y = Math.floor(pos / size);
 
-      // Ajustamos la posición de fondo para que cada pieza tenga su parte
       piece.style.backgroundSize = `${size * 100}% ${size * 100}%`;
       piece.style.backgroundPosition = `${-x * 100}% ${-y * 100}%`;
 
@@ -147,7 +243,6 @@
     checkWin();
   }
 
-  // Comprobamos si las piezas están en orden
   function checkWin() {
     const pieces = document.querySelectorAll('.piece');
     const correct = [...pieces].every((piece, i) => +piece.dataset.correct === i);
@@ -156,13 +251,19 @@
     }
   }
 
-  // Inicializa con el valor por defecto (3x3)
   initPuzzle(3);
 
-  // Si ella cambia la cantidad de piezas, reinicia el puzzle
   selector.addEventListener('change', () => {
     initPuzzle(parseInt(selector.value));
   });
+</script>
+<script>
+  const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("navbar-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+      });
 </script>
 
 </body>

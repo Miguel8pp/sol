@@ -96,8 +96,8 @@ header {
 
 @keyframes slider {
    0%{background-image: url("https://i.pinimg.com/originals/42/db/f8/42dbf8848e4c118b821fa4a19ba979dd.jpg");}
-   25%{background-image:url("https://sdmntpreastus.oaiusercontent.com/files/00000000-ee38-61f9-b646-67e1a9a06fd6/raw?se=2025-05-11T08%3A58%3A10Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=b0fd38cc-3d33-418f-920e-4798de4acdd1&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-10T19%3A19%3A16Z&ske=2025-05-11T19%3A19%3A16Z&sks=b&skv=2024-08-04&sig=WdJg5dHITAWvJUX6e821o9EgQV23Ftfe9wkNNG9HqpU%3D") ;}
+   25%{background-image:url("../static/img/img.png") ;}
    50%{background-image:url("https://frasesparami.com/wp-content/uploads/2017/09/imagenes-te-amo.jpg") ;}
    75%{background-image:url("https://tse1.mm.bing.net/th/id/OIP.bi94_YXCd-KZsXA9Vu5kPgHaE8?w=2500&h=1669&rs=1&pid=ImgDetMain") ;}
-   100%{background-image:url("https://sdmntpreastus.oaiusercontent.com/files/00000000-42d0-61f9-b1e9-834a127c0b1f/raw?se=2025-05-11T09%3A11%3A40Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=b0fd38cc-3d33-418f-920e-4798de4acdd1&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-10T19%3A17%3A29Z&ske=2025-05-11T19%3A17%3A29Z&sks=b&skv=2024-08-04&sig=DYN2/%2BSqdxpWgwf8SjD/DVBC/0A3temlIu5m701Ojd8%3D") ;}
+   100%{background-image:url("../static/img/img3.png") ;}
 }

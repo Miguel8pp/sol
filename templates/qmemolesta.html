@@ -1,31 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Qué me molesta de ti</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../static/qmemolesta.css">
-</head>
-<body>
-  <header><a href="javascript:history.back()">Regresar</a>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qué me molesta de ti</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/qmemolesta.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <h3>¿Qué me molesta de ti? 💔</h3>
+        </div>
+        <button class="hamburger" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="navbar-menu" id="navbar-menu">
+          <li>
+            <a href="/teamo"><i class="fas fa-heart"></i> Te Amo</a>
+          </li>
+          <li>
+            <a href="/canciones"><i class="fas fa-music"></i> Canciones</a>
+          </li>
+          <li>
+            <a href="/tiempo"><i class="fas fa-clock"></i> Tiempo Juntos</a>
+          </li>
+          <li>
+            <a href="/rompe"
+              ><i class="fas fa-puzzle-piece"></i> Rompecabezas</a
+            >
+          </li>
+          <li>
+            <a href="/"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <button id="playMusicBtn" onclick="toggleMusic()">Reproducir Música</button>
+    <button id="playMusicBtn" onclick="toggleMusic()">Reproducir Música</button>
 
-  <audio id="music" src="{{ url_for('static', filename='audios/ed.mp3') }}" loop></audio>
+    <audio
+      id="music"
+      src="{{ url_for('static', filename='audios/ed.mp3') }}"
+      loop
+    ></audio>
 
-  <section>
-    <article>
-      <h3>¿Qué me molesta de ti? 💔</h3>
-      <p id="typedText"></p>
-    </article>
-  </section>
+    <section>
+      <article>
+        <p id="typedText"></p>
+      </article>
+    </section>
 
-  <canvas id="heartCanvas"></canvas>
+    <canvas id="heartCanvas"></canvas>
 
-  <script>
-    const fullText = `Pues sinceramente no hay mucho, me molesta que a veces siento que te 
+    <script>
+      const fullText = `Pues sinceramente no hay mucho, me molesta que a veces siento que te 
         digo algo que me gusta pero no le das mucha importancia o interés 🤷‍♂️, 
         y pues también tal vez no entiendes mucho lo que te digo, pero 
         me gusta que muestres interés 😍 ya que es algo que me gusta. 
@@ -37,99 +76,115 @@
     Pero a pesar de todo esto, te sigo amando mucho 😘 y lo único que quiero es que me comprendas más. 💖
     ¡Te quiero mucho! 💞`;
 
-    const element = document.getElementById('typedText');
-    let i = 0;
+      const element = document.getElementById("typedText");
+      let i = 0;
 
-    function typeWriter() {
-      if (i < fullText.length) {
-        if (fullText.substr(i, 3) === "<a ") {
-          let end = fullText.indexOf("</a>", i) + 4;
-          element.innerHTML += fullText.substring(i, end);
-          i = end;
-        } else {
-          element.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
-          i++;
+      function typeWriter() {
+        if (i < fullText.length) {
+          if (fullText.substr(i, 3) === "<a ") {
+            let end = fullText.indexOf("</a>", i) + 4;
+            element.innerHTML += fullText.substring(i, end);
+            i = end;
+          } else {
+            element.innerHTML +=
+              fullText.charAt(i) === "\n" ? "<br>" : fullText.charAt(i);
+            i++;
+          }
+          setTimeout(typeWriter, 25);
         }
-        setTimeout(typeWriter, 25);
       }
-    }
 
-    typeWriter();
+      typeWriter();
 
-    const canvas = document.getElementById('heartCanvas');
-    const ctx = canvas.getContext('2d');
+      const canvas = document.getElementById("heartCanvas");
+      const ctx = canvas.getContext("2d");
 
-    function heartX(k) {
-      return 15 * Math.pow(Math.sin(k), 3);
-    }
+      function heartX(k) {
+        return 15 * Math.pow(Math.sin(k), 3);
+      }
 
-    function heartY(k) {
-      return 12 * Math.cos(k) - 5 * Math.cos(2 * k) - 2 * Math.cos(3 * k) - Math.cos(4 * k);
-    }
+      function heartY(k) {
+        return (
+          12 * Math.cos(k) -
+          5 * Math.cos(2 * k) -
+          2 * Math.cos(3 * k) -
+          Math.cos(4 * k)
+        );
+      }
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * 0.8;
-      canvas.height = window.innerHeight * 0.5;
-      drawHeart();
-    }
+      function resizeCanvas() {
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 0.5;
+        drawHeart();
+      }
 
-    let points = [];
-    for (let i = 0; i <= 600; i++) {
-      let k = i * 0.05;
-      points.push({ x: heartX(k), y: heartY(k) });
-    }
+      let points = [];
+      for (let i = 0; i <= 600; i++) {
+        let k = i * 0.05;
+        points.push({ x: heartX(k), y: heartY(k) });
+      }
 
-    function drawHeart() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-      ctx.strokeStyle = 'red';
-      ctx.lineWidth = 2;
+      function drawHeart() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
 
-      let scale = canvas.width / 40;
-      let offsetX = canvas.width / 2;
-      let offsetY = canvas.height / 2;
+        let scale = canvas.width / 40;
+        let offsetX = canvas.width / 2;
+        let offsetY = canvas.height / 2;
 
-      points.forEach((pt, i) => {
-        let x = pt.x * scale + offsetX;
-        let y = -pt.y * scale + offsetY;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        points.forEach((pt, i) => {
+          let x = pt.x * scale + offsetX;
+          let y = -pt.y * scale + offsetY;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+
+        ctx.stroke();
+      }
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+      const heartbeatSound = document.getElementById("heartbeatSound");
+
+      window.onload = () => {
+        const audioState = localStorage.getItem("audioState");
+        if (audioState === "playing") {
+          heartbeatSound.play();
+        } else if (audioState === "paused") {
+          heartbeatSound.pause();
+        }
+      };
+
+      heartbeatSound.onplay = () => {
+        localStorage.setItem("audioState", "playing");
+      };
+
+      heartbeatSound.onpause = () => {
+        localStorage.setItem("audioState", "paused");
+      };
+
+      function toggleMusic() {
+        if (music.paused) {
+          music.play();
+          document.getElementById("playMusicBtn").innerText = "Pausar Música";
+        } else {
+          music.pause();
+          document.getElementById("playMusicBtn").innerText =
+            "Reproducir Música";
+        }
+      }
+
+     
+    </script>
+    <script>
+       const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("navbar-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
       });
-
-      ctx.stroke();
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-       const heartbeatSound = document.getElementById('heartbeatSound');
-
-    // Reproducir el audio automáticamente si está guardado en localStorage
-    window.onload = () => {
-      const audioState = localStorage.getItem('audioState');
-      if (audioState === 'playing') {
-        heartbeatSound.play();
-      } else if (audioState === 'paused') {
-        heartbeatSound.pause();
-      }
-    };
-
-    heartbeatSound.onplay = () => {
-      localStorage.setItem('audioState', 'playing');
-    };
-
-    heartbeatSound.onpause = () => {
-      localStorage.setItem('audioState', 'paused');
-    };
-
-    function toggleMusic() {
-      if (music.paused) {
-        music.play();
-        document.getElementById("playMusicBtn").innerText = "Pausar Música";
-      } else {
-        music.pause();
-        document.getElementById("playMusicBtn").innerText = "Reproducir Música";
-      }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

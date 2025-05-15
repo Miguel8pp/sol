@@ -1,108 +1,159 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>💌Canciones💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/24e326a22f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/canciones.css">
-</head>
-<body>
-    <header><a href="javascript:history.back()">Regresar</a></header>
-    <h3>Canciones que me hacen pensar en ti y te dedico</h3>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/24e326a22f.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../static/canciones.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <h3>Canciones que me hacen pensar en ti y te dedico</h3>
+        </div>
+        <button class="hamburger" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="navbar-menu" id="navbar-menu">
+          <li>
+            <a href="/teamo"><i class="fas fa-heart"></i> Te Amo</a>
+          </li>
+          <li>
+            <a href="/canciones"><i class="fas fa-music"></i> Canciones</a>
+          </li>
+          <li>
+            <a href="/tiempo"><i class="fas fa-clock"></i> Tiempo Juntos</a>
+          </li>
+          <li>
+            <a href="/rompe"
+              ><i class="fas fa-puzzle-piece"></i> Rompecabezas</a
+            >
+          </li>
+          <li>
+            <a href="/"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-        <section class="container">
-            {% for cancioness in cancioness %}
-            <!-- loop.index: número del ciclo empezando en 1 -->
-            <!-- Si el número del artículo es par → ponle la clase ros -->
-            <article class="{% if loop.index is even %}ros{% endif %}">
-                <div class="icono"><i class="fa-solid fa-music"></i></div>
-                <div class="info">
-                    <h4 class="titulo">{{ cancioness.titulo }}</h4>
-                    <p>{{ cancioness.autor }}</p>
-                    <button class="playMusicBtn" data-audio="{{ cancioness.naudio }}"><i class="fa-solid fa-play"></i></button>
-                </div>
-                <audio id="{{ cancioness.naudio }}" src="{{ cancioness.cancion }}" loop></audio>
-                <div class="player-ui" style="display: none;">
-                    <input type="range" class="progress" value="0" step="1">
-                    <div class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></div>
-                  </div>
-            </article>
-            {% endfor %}
-        </section>
+    <section class="container">
+      {% for cancioness in cancioness %}
+      <!-- loop.index: número del ciclo empezando en 1 -->
+      <!-- Si el número del artículo es par → ponle la clase ros -->
+      <article class="{% if loop.index is even %}ros{% endif %}">
+        <div class="icono"><i class="fa-solid fa-music"></i></div>
+        <div class="info">
+          <h4 class="titulo">{{ cancioness.titulo }}</h4>
+          <p>{{ cancioness.autor }}</p>
+          <button class="playMusicBtn" data-audio="{{ cancioness.naudio }}">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+        <audio
+          id="{{ cancioness.naudio }}"
+          src="{{ cancioness.cancion }}"
+          loop
+        ></audio>
+        <div class="player-ui" style="display: none">
+          <input type="range" class="progress" value="0" step="1" />
+          <div class="time">
+            <span class="current">0:00</span> /
+            <span class="duration">0:00</span>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
     <script>
-        const buttons = document.querySelectorAll(".playMusicBtn");
-    
-        buttons.forEach(btn => {
-            const audioId = btn.getAttribute("data-audio");
-            const audio = document.getElementById(audioId);
-    
-            const article = btn.closest("article");
-            const playerUI = article.querySelector(".player-ui");
-            const progress = article.querySelector(".progress");
-            const currentTimeEl = article.querySelector(".current");
-            const durationEl = article.querySelector(".duration");
-    
-            // 🔁 Este evento asegura que la duración se muestra bien
-            audio.addEventListener("loadedmetadata", () => {
-                durationEl.textContent = formatTime(audio.duration);
-                progress.max = audio.duration;
-            });
-    
-            // 🎧 Actualiza la barra y el tiempo actual
-            audio.addEventListener("timeupdate", () => {
-                progress.value = audio.currentTime;
-                currentTimeEl.textContent = formatTime(audio.currentTime);
-            });
-    
-            // 🎛 Permite mover la barra para adelantar o retroceder
-            progress.addEventListener("input", () => {
-                audio.currentTime = progress.value;
-            });
-    
-            // ▶️ Acción al hacer clic en el botón
-            btn.addEventListener("click", () => {
-                // Pausar otros audios
-                document.querySelectorAll("audio").forEach(a => {
-                    if (a !== audio) {
-                        a.pause();
-                        a.currentTime = 0;
-                        const otherArticle = a.closest("article");
-                        otherArticle.querySelector(".player-ui").style.display = "none";
-                        otherArticle.querySelector(".progress").value = 0;
-                        otherArticle.querySelector(".current").textContent = "0:00";
-                    }
-                });
-    
-                // Resetear íconos
-                buttons.forEach(b => {
-                    b.innerHTML = '<i class="fa-solid fa-play"></i>';
-                });
-    
-                // Tocar o pausar el audio
-                if (audio.paused) {
-                    audio.play();
-                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                    playerUI.style.display = "block";
-                } else {
-                    audio.pause();
-                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                    playerUI.style.display = "none";
-                }
-            });
-    
-            // 🧩 Convierte segundos a formato mm:ss
-            function formatTime(seconds) {
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-                return `${mins}:${secs}`;
-            }
+      const buttons = document.querySelectorAll(".playMusicBtn");
+
+      buttons.forEach((btn) => {
+        const audioId = btn.getAttribute("data-audio");
+        const audio = document.getElementById(audioId);
+
+        const article = btn.closest("article");
+        const playerUI = article.querySelector(".player-ui");
+        const progress = article.querySelector(".progress");
+        const currentTimeEl = article.querySelector(".current");
+        const durationEl = article.querySelector(".duration");
+
+        // 🔁 Este evento asegura que la duración se muestra bien
+        audio.addEventListener("loadedmetadata", () => {
+          durationEl.textContent = formatTime(audio.duration);
+          progress.max = audio.duration;
         });
+
+        // 🎧 Actualiza la barra y el tiempo actual
+        audio.addEventListener("timeupdate", () => {
+          progress.value = audio.currentTime;
+          currentTimeEl.textContent = formatTime(audio.currentTime);
+        });
+
+        // 🎛 Permite mover la barra para adelantar o retroceder
+        progress.addEventListener("input", () => {
+          audio.currentTime = progress.value;
+        });
+
+        // ▶️ Acción al hacer clic en el botón
+        btn.addEventListener("click", () => {
+          // Pausar otros audios
+          document.querySelectorAll("audio").forEach((a) => {
+            if (a !== audio) {
+              a.pause();
+              a.currentTime = 0;
+              const otherArticle = a.closest("article");
+              otherArticle.querySelector(".player-ui").style.display = "none";
+              otherArticle.querySelector(".progress").value = 0;
+              otherArticle.querySelector(".current").textContent = "0:00";
+            }
+          });
+
+          // Resetear íconos
+          buttons.forEach((b) => {
+            b.innerHTML = '<i class="fa-solid fa-play"></i>';
+          });
+
+          // Tocar o pausar el audio
+          if (audio.paused) {
+            audio.play();
+            btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            playerUI.style.display = "block";
+          } else {
+            audio.pause();
+            btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            playerUI.style.display = "none";
+          }
+        });
+
+        // 🧩 Convierte segundos a formato mm:ss
+        function formatTime(seconds) {
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60)
+            .toString()
+            .padStart(2, "0");
+          return `${mins}:${secs}`;
+        }
+      });
     </script>
-    
-    
-    
-    
-</body>
+
+    <script>
+      const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("navbar-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+      });
+    </script>
+  </body>
 </html>
