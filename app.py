@@ -28,6 +28,7 @@ from bson import ObjectId
 import gridfs
 from io import BytesIO
 from flask_socketio import SocketIO
+from urllib.parse import quote_plus
 
 
 load_dotenv()
@@ -90,21 +91,22 @@ def admin_post():
 @app.route("/login", methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-
-        usuario = request.form.get("usuario")
+        usuario_form = request.form.get("usuario") # Renombré a usuario_form para mayor claridad
         contraseña = request.form.get("contraseña")
 
-        datos_user = collection.find_one({'usuario':usuario})
+        datos_user = collection.find_one({'usuario': usuario_form}) # Usa usuario_form aquí
         if datos_user and bcrypt.check_password_hash(datos_user['contrasena'], contraseña):
-            session['usuario'] = username
-
+            session['usuario'] = usuario_form # Guarda la cadena de texto original en la sesión
             if datos_user.get('rol') == 'admin':
                 return redirect(url_for('admin_post'))
+            else:
+                # Si tienes un rol de usuario normal, podrías redirigir a otra página
+                # o mostrar un mensaje de éxito. Aquí, por simplicidad, redirigimos a inicio.
+                return redirect(url_for('inicio')) # O a donde corresponda para usuarios normales
         else:
             flash("Usuario o contraseña incorrectos. Intenta de nuevo.", "error")
 
     return render_template('login.html')
-
 
 @app.route("/admin/nuevo", methods=["POST"])
 def nuevo():
