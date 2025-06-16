@@ -152,6 +152,10 @@ def eliminar(id):
 
     return redirect("/admin")
 
+@app.route('/canciones2')
+def canciones2():
+    return render_template('index.html')
+
 # Ejecutar la aplicación con SocketIO
 if __name__ == '__main__':
     socketio.run(app, debug=True)
